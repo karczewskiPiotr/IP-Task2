@@ -1,7 +1,7 @@
 #include "HistogramProcesser.h"
 #include <iostream>
 
-
+using namespace std;
 
 HistogramProcesser::HistogramProcesser()
 {
@@ -17,19 +17,16 @@ HistogramProcesser::~HistogramProcesser()
 {
 }
 
-void HistogramProcesser::makeHistogram()
+void HistogramProcesser::processImage()
 {
-	if (option < 17) return;
-
 	cimg_library::CImg<unsigned char> initialImage;
-	
 	try
 	{
 		initialImage.load(imageName.c_str());
 	}
 	catch (cimg_library::CImgException)
 	{
-		std::cout << std::endl << "Image could not be loaded. Please check whether the filename is correct." << std::endl;
+		cout << endl << "Image could not be loaded. Please check whether the filename is correct." << endl;
 		return;
 	}
 
@@ -41,35 +38,44 @@ void HistogramProcesser::makeHistogram()
 
 	switch (option)
 	{
-	case hpower:
-		std::cout << "Function under developement" << std::endl;
-		break;
-	case cmean:
-		std::cout << "Function under developement" << std::endl;
-		break;
-	case cvariance:
-		std::cout << "Function under developement" << std::endl;
-		break;
-	case cvarcoi:
-		std::cout << "Function under developement" << std::endl;
-		break;
-	case casyco:
-		std::cout << "Function under developement" << std::endl;
-		break;
-	case cvarcoii:
-		std::cout << "Function under developement" << std::endl;
-		break;
-	case centropy:
-		std::cout << "Function under developement" << std::endl;
-		break;
-	case sedgesharp:
-		std::cout << "Function under developement" << std::endl;
-		break;
-	case orosenfeld:
-		std::cout << "Function under developement" << std::endl;
-		break;
-	default:
-		break;
+		case histogram:
+			cout << "Function under developement" << endl;
+			break;
+		case hpower:
+			cout << "Function under developement" << endl;
+			break;
+		case cmean:
+			cout << "Function under developement" << endl;
+			break;
+		case cvariance:
+			cout << "Function under developement" << endl;
+			break;
+		case cstdev:
+			cout << "Function under developement" << endl;
+			break;
+		case cvarcoi:
+			cout << "Function under developement" << endl;
+			break;
+		case casyco:
+			cout << "Function under developement" << endl;
+			break;
+		case cflatco:
+			cout << "Function under developement" << endl;
+			break;
+		case cvarcoii:
+			cout << "Function under developement" << endl;
+			break;
+		case centropy:
+			cout << "Function under developement" << endl;
+			break;
+		case sedgesharp:
+			cout << "Function under developement" << endl;
+			break;
+		case orosenfeld:
+			cout << "Function under developement" << endl;
+			break;
+		default:
+			break;
 	}
 
 	image.save("histogram.bmp");
