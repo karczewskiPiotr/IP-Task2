@@ -13,32 +13,48 @@ private:
 	std::string noisyImageName;
 	std::string denoisedImageName;
 
-	std::string options[26]{
+	std::string options[29]{
 		//Task 1 options (17 options) <0, 16>
 		"--help", "--brightness", "--contrast", "--negative", "--hflip", "--vflip", "--dflip", "--shrink", "--enlarge", "--min", "--max", "--median", "--mse", "--pmse", "--snr", "--psnr", "--md",
-		//Task 2 options (9 options) <17, 25>
-		"--hpower", "--cmean", "--cvariance", "--cvarcoi", "--casyco", "--cvarcoii", "--centropy", "--sedgesharp", "--orosenfeld"
+		//Task 2 options (9 options) <17, 28>
+		"--histogram", "--hpower", "--cmean", "--cvariance", "--cstdev", "--cvarcoi", "--casyco", "--cflatco", "--cvarcoii", "--centropy", "--sedgesharp", "--orosenfeld"
 	};
 
-	bool optionIsValid(std::string option);
-	bool optionRequiresValue(std::string option);
-	bool valueIsValid(std::string value);
-	bool isNameOfFile(std::string name);
+	std::string optionsRequiringValues[8]{
+		"--brightness", "--contrast", "--shrink", "--enlarge", "--min", "--max", "--median", "--histogram"
+	};
+
+	bool optionIsValid(std::string option) const;
+	bool optionRequiresValue(std::string option) const;
+	bool valueIsValid(std::string value) const;
+	bool isNameOfFile(std::string name) const;
 
 public:
 	ArgumentsHandler(int argc, char* argv[]);
 	~ArgumentsHandler();
 
+	enum Processers
+	{
+		ImageProcesser = 0,
+		HistogramProcesser
+	};
+
+	struct Arguments
+	{
+		std::string imageName;
+		std::string noisyImageName;
+		std::string denoisedImageName;
+		int option;
+		double value;
+		Processers processer;
+	};
+
 	bool argumentsAreValid = false;
 
-	int convertToInt(std::string option);
+	int convertToInt(std::string option) const;
 
-	void helpMessage();
+	void helpMessage() const;
 	void validateArguments();
-
-	std::string get_imageName() const;
-	std::string get_noisyImageName() const;
-	std::string get_denoisedImageName() const;
-	std::string get_option() const;
-	double get_value() const;
+	Processers get_currentProcesser() const;
+	Arguments get_arguments() const;
 };

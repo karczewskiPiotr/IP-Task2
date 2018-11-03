@@ -6,7 +6,7 @@ class HistogramProcesser : public Processer
 private:
 	enum options
 	{
-		hpower = 18, cmean, cvariance, cvarcoi, casyco, cvarcoii, centropy, sedgesharp, orosenfeld
+		histogram = 18, hpower, cmean, cvariance, cstdev, cvarcoi, casyco, cflatco, cvarcoii, centropy, sedgesharp, orosenfeld
 	};
 
 public:
@@ -14,6 +14,6 @@ public:
 	HistogramProcesser(std::string imageName, int option);
 	~HistogramProcesser();
 
-	void makeHistogram();
+	void processImage();
 };
 
