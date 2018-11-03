@@ -7,6 +7,7 @@ class Processer
 protected:
 	std::string imageName;
 	int option;
+	double value;
 
 	cimg_library::CImg<unsigned char> image;
 	unsigned short int height;
@@ -16,7 +17,7 @@ protected:
 	
 public:
 	Processer();
-	Processer(std::string imageName, int option);
+	Processer(std::string imageName, int option, double value);
 	~Processer();
 };
 

@@ -7,8 +7,8 @@ HistogramProcesser::HistogramProcesser()
 {
 }
 
-HistogramProcesser::HistogramProcesser(std::string imageName, int option)
-	:Processer(imageName, option)
+HistogramProcesser::HistogramProcesser(std::string imageName, int option, double value)
+	:Processer(imageName, option, value)
 {
 }
 
@@ -39,7 +39,7 @@ void HistogramProcesser::processImage()
 	switch (option)
 	{
 		case histogram:
-			cout << "Function under developement" << endl;
+			createHistogram((int)value);
 			break;
 		case hpower:
 			cout << "Function under developement" << endl;
@@ -78,5 +78,6 @@ void HistogramProcesser::processImage()
 			break;
 	}
 
-	image.save("histogram.bmp");
+	histogramImage.display("Histogram preview", false);
+	histogramImage.save("histogram.bmp");
 }

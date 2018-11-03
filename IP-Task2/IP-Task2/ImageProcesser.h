@@ -14,8 +14,6 @@ private:
 	std::string noisyImageName;
 	std::string denoisedImageName;
 
-	double value;
-
 	cimg_library::CImg<unsigned char> noisyImage;
 	cimg_library::CImg<unsigned char> denoisedImage;
 

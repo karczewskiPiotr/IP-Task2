@@ -156,6 +156,7 @@
     <ClCompile Include="BasicImageTransformations.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="HelperMethods.cpp" />
+    <ClCompile Include="HistogramCreator.cpp" />
     <ClCompile Include="HistogramProcesser.cpp" />
     <ClCompile Include="ImageAnalyzers.cpp" />
     <ClCompile Include="ImageFilters.cpp" />
@@ -170,6 +171,10 @@
     <ClInclude Include="HistogramProcesser.h" />
     <ClInclude Include="ImageProcesser.h" />
     <ClInclude Include="Processer.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="IP-Task2.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
