@@ -53,16 +53,16 @@ void HistogramProcesser::processImage()
 			cout << "Variance is: " << calculateVariance() << endl;
 			break;
 		case cstdev:
-			cout << "Function under developement" << endl;
+			cout << "Standard deviation is: " << calculateStandardDeviation() << endl;
 			break;
 		case cvarcoi:
-			cout << "Function under developement" << endl;
+			cout << "Variation coefficient I is: " << calculateVariationCoefficientI() << endl;
 			break;
 		case casyco:
-			cout << "Function under developement" << endl;
+			cout << "Assymetry coefficient is: " << calculateAssymetryCoefficient() << endl;
 			break;
 		case cflatco:
-			cout << "Function under developement" << endl;
+			cout << "Flattening coefficient is: " << calculateFlatteningCoefficient() << endl;
 			break;
 		case cvarcoii:
 			cout << "Function under developement" << endl;
