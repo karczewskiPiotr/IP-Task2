@@ -159,6 +159,7 @@
     <ClCompile Include="HistogramCreator.cpp" />
     <ClCompile Include="HistogramProcesser.cpp" />
     <ClCompile Include="ImageAnalyzers.cpp" />
+    <ClCompile Include="ImageCharacteristicsCalculator.cpp" />
     <ClCompile Include="ImageFilters.cpp" />
     <ClCompile Include="ImageProcesser.cpp" />
     <ClCompile Include="main.cpp" />

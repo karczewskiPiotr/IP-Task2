@@ -36,6 +36,8 @@ void HistogramProcesser::processImage()
 	height = image.height();
 	width = image.width();
 
+	getImageHistogram((int)value);
+
 	switch (option)
 	{
 		case histogram:
@@ -45,10 +47,10 @@ void HistogramProcesser::processImage()
 			cout << "Function under developement" << endl;
 			break;
 		case cmean:
-			cout << "Function under developement" << endl;
+			cout << "Mean is: " << calculateMean() << endl;
 			break;
 		case cvariance:
-			cout << "Function under developement" << endl;
+			cout << "Variance is: " << calculateVariance() << endl;
 			break;
 		case cstdev:
 			cout << "Function under developement" << endl;
@@ -77,7 +79,4 @@ void HistogramProcesser::processImage()
 		default:
 			break;
 	}
-
-	histogramImage.display("Histogram preview", false);
-	histogramImage.save("histogram.bmp");
 }
