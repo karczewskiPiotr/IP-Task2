@@ -24,3 +24,13 @@ double HistogramProcesser::calculateVariance()
 
 	return numerator / numberOfPixels;
 }
+
+double HistogramProcesser::calculateStandardDeviation()
+{
+	return sqrt(calculateVariance());
+}
+
+double HistogramProcesser::calculateVariationCoefficientI()
+{
+	return calculateStandardDeviation() / calculateMean();
+}
