@@ -1,0 +1,17 @@
+{
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Visual Studio 15 2017",
+      "configurationType": "Debug",
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ],
+      "buildRoot": "${env.USERPROFILE}\\Desktop\\Sprawozdania\\2_Semestr\\Image_Processing\\Labs\\IP Task 2\\build",
+      "installRoot": "${env.USERPROFILE}\\Desktop\\Sprawozdania\\2_Semestr\\Image_Processing\\Labs\\IP Task 2\\install",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": ""
+    }
+  ]
+}

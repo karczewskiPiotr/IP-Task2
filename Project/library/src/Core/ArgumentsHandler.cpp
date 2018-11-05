@@ -14,56 +14,60 @@ ArgumentsHandler::~ArgumentsHandler()
 {
 }
 
-int ArgumentsHandler::convertToInt(std::string option)
+int ArgumentsHandler::convertToInt(std::string option) const
 {
-	for (int i = 0; i < 17; i++)
+	for (int i = 0; i < 26; i++)
 	{
 		if (options[i] == option) return i + 1;
 	}
 	return 0;
 }
 
-bool ArgumentsHandler::optionIsValid(string option)
+bool ArgumentsHandler::optionIsValid(string option) const
 {
 	return find(begin(options), end(options), option) != end(options);
 }
 
-bool ArgumentsHandler::optionRequiresValue(string option)
+bool ArgumentsHandler::optionRequiresValue(string option) const
 {
-	return option == "--brightness" || option == "--contrast" || option == "--enlarge" || option == "--shrink" || option == "--median" || option == "--min" || option == "--max";
+	return find(begin(optionsRequiringValues), end(optionsRequiringValues), option) != end(optionsRequiringValues);
 }
 
-bool ArgumentsHandler::valueIsValid(string value)
+bool ArgumentsHandler::valueIsValid(string value) const
 {
 	int dot_counter = 0;
+	if (option == "--histogram" && stoi(value) > 2) return false;
 	for (string::iterator iterator = value.begin(); iterator != value.end(); ++iterator)
 	{
 		if (*iterator < 48 || *iterator > 57)
 		{
+			// Options which accept floats and negative values
 			if (option == "--brightness" || option == "--contrast")
 			{
 				if (iterator == value.begin() && *iterator == 45) continue;
-				if (*iterator != 46) return false;
-				else if (*iterator == 46) dot_counter += 1;
+				if (iterator != value.begin() && *iterator == 46) dot_counter++;
+				else return false;
 			}
+			// Options which accept floats
 			else if (option == "--enlarge" || option == "--shrink")
 			{
-				if (*iterator != 46) return false;
-				else if (*iterator == 46) dot_counter += 1;
+				if (iterator != value.begin() && *iterator == 46) dot_counter++;
+				else return false;
 			}
-			if (option == "--median" || option == "--min" || option == "--max") return false;
+			// Options which accept integrals
+			else return false;
 		}
 		if (dot_counter > 1) return false;
 	}
 	return true;
 }
 
-bool ArgumentsHandler::isNameOfFile(std::string name)
+bool ArgumentsHandler::isNameOfFile(std::string name) const
 {
 	return name.size() >= 4 && name.compare(name.size() - 4, 4, ".bmp") == 0;
 }
 
-void ArgumentsHandler::helpMessage()
+void ArgumentsHandler::helpMessage() const
 {
 	std::cout << R"(Command line format:
 	name --command [-argument=value [...]]
@@ -209,9 +213,9 @@ void ArgumentsHandler::validateArguments()
 		break;
 	case 5:
 		imageName = argv[1];
+		option = argv[2];
 		noisyImageName = argv[3];
 		denoisedImageName = argv[4];
-		option = argv[2];
 
 		try
 		{
@@ -234,27 +238,23 @@ void ArgumentsHandler::validateArguments()
 	}
 }
 
-string ArgumentsHandler::get_imageName() const
+ArgumentsHandler::Processers ArgumentsHandler::get_currentProcesser() const
 {
-	return imageName;
+	int currentOption = convertToInt(option);
+	if (currentOption < 17) return Processers::ImageProcesser;
+	if (currentOption < 29) return Processers::HistogramProcesser;
+	//TODO: return invalid processer and check against it in main
 }
 
-std::string ArgumentsHandler::get_noisyImageName() const
+ArgumentsHandler::Arguments ArgumentsHandler::get_arguments() const
 {
-	return noisyImageName;
-}
+	ArgumentsHandler::Arguments arguments;
+	arguments.imageName = imageName;
+	arguments.denoisedImageName = denoisedImageName;
+	arguments.noisyImageName = noisyImageName;
+	arguments.option = convertToInt(option);
+	arguments.value = value.length() > 0 ? stod(value) : 0;
+	arguments.processer = get_currentProcesser();
 
-std::string ArgumentsHandler::get_denoisedImageName() const
-{
-	return denoisedImageName;
-}
-
-string ArgumentsHandler::get_option() const
-{
-	return option;
-}
-
-double ArgumentsHandler::get_value() const
-{
-	return value.length() > 0 ? stod(value) : 0;
+	return arguments;
 }
