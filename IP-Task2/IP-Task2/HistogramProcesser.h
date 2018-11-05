@@ -16,6 +16,8 @@ private:
 	void createHistogram(int channel);
 	double calculateMean();
 	double calculateVariance();
+	double calculateStandardDeviation();
+	double calculateVariationCoefficientI();
 public:
 	HistogramProcesser();
 	HistogramProcesser(std::string imageName, int option, double value);
