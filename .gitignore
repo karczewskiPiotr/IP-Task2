@@ -331,3 +331,5 @@ ASALocalRun/
 
 # Ignore images
 *.bmp
+# Ignore CMakeSettings.json
+CMakeSettings.json
