@@ -85,6 +85,6 @@ double HistogramProcesser::calculateInformationSourceEntropy()
 			numerator += histogramHeight[i] * log2(histogramHeight[i] / numberOfPixels);
 		}
 	}
-	return numerator / numberOfPixels;
+	return - numerator / numberOfPixels;
 }
 
