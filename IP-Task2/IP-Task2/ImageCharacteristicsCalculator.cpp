@@ -34,3 +34,31 @@ double HistogramProcesser::calculateVariationCoefficientI()
 {
 	return calculateStandardDeviation() / calculateMean();
 }
+
+double HistogramProcesser::calculateAssymetryCoefficient()
+{
+	int numberOfPixels = width * height;
+	double mean = calculateMean();
+	double standardDeviation = calculateStandardDeviation();
+	double numerator = 0;
+	for (int i = 0; i < 256; i++)
+	{
+		numerator += pow(i - mean, 3) * histogramHeight[i];
+	}
+
+	return numerator / (numberOfPixels * pow(standardDeviation, 3));
+}
+
+double HistogramProcesser::calculateFlatteningCoefficient()
+{
+	int numberOfPixels = width * height;
+	double mean = calculateMean();
+	double standardDeviation = calculateStandardDeviation();
+	double numerator = 0;
+	for (int i = 0; i < 256; i++)
+	{
+		numerator += pow(i - mean, 4) * histogramHeight[i];
+	}
+
+	return (numerator - 3) / (numberOfPixels * pow(standardDeviation, 4));
+}

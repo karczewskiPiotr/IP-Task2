@@ -18,6 +18,8 @@ private:
 	double calculateVariance();
 	double calculateStandardDeviation();
 	double calculateVariationCoefficientI();
+	double calculateAssymetryCoefficient();
+	double calculateFlatteningCoefficient();
 public:
 	HistogramProcesser();
 	HistogramProcesser(std::string imageName, int option, double value);
