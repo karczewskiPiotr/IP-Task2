@@ -54,6 +54,9 @@
     <ClCompile Include="HistogramProcesser.cpp">
       <Filter>Pliki źródłowe\HistogramProcesser</Filter>
     </ClCompile>
+    <ClCompile Include="HistogramCreator.cpp">
+      <Filter>Pliki źródłowe\HistogramProcesser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentsHandler.h">
@@ -74,5 +77,13 @@
     <ClInclude Include="HistogramProcesser.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="IP-Task2.rc">
+      <Filter>Pliki zasobów</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

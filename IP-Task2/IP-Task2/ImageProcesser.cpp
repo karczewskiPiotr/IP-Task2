@@ -6,7 +6,7 @@ using namespace cimg_library;
 using namespace std;
 
 ImageProcesser::ImageProcesser(std::string imageName, int option, double value, std::string noisyImageName, std::string denoisedImageName)
-	:Processer(imageName, option), value(value), noisyImageName(noisyImageName), denoisedImageName(denoisedImageName)
+	:Processer(imageName, option, value), noisyImageName(noisyImageName), denoisedImageName(denoisedImageName)
 {
 }
 
@@ -17,8 +17,6 @@ ImageProcesser::~ImageProcesser()
 
 void ImageProcesser::processImage()
 {
-	if (option > 17) return;
-
 	cimg_library::CImg<unsigned char> initialImage;
 	cimg_library::CImg<unsigned char> initialNoisyImage;
 	cimg_library::CImg<unsigned char> initialDenoisedImage;

@@ -15,8 +15,8 @@ Processer::Processer()
 {
 }
 
-Processer::Processer(std::string imageName, int option)
-	:imageName(imageName), option(option)
+Processer::Processer(std::string imageName, int option, double value)
+	:imageName(imageName), option(option), value(value)
 {
 }
 

@@ -36,6 +36,7 @@ bool ArgumentsHandler::optionRequiresValue(string option) const
 bool ArgumentsHandler::valueIsValid(string value) const
 {
 	int dot_counter = 0;
+	if (option == "--histogram" && stoi(value) > 2) return false;
 	for (string::iterator iterator = value.begin(); iterator != value.end(); ++iterator)
 	{
 		if (*iterator < 48 || *iterator > 57)
