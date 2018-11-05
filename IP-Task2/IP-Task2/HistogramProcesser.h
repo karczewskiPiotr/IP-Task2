@@ -20,6 +20,9 @@ private:
 	double calculateVariationCoefficientI();
 	double calculateAssymetryCoefficient();
 	double calculateFlatteningCoefficient();
+	double calculateVariationCoefficientII();
+	double calculateInformationSourceEntropy();
+
 public:
 	HistogramProcesser();
 	HistogramProcesser(std::string imageName, int option, double value);

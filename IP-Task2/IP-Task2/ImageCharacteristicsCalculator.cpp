@@ -62,3 +62,29 @@ double HistogramProcesser::calculateFlatteningCoefficient()
 
 	return (numerator - 3) / (numberOfPixels * pow(standardDeviation, 4));
 }
+
+double HistogramProcesser::calculateVariationCoefficientII()
+{
+	int numberOfPixels = width * height;
+	double numerator = 0;
+	for (int i = 0; i < 256; i++)
+	{
+		numerator += pow(histogramHeight[i], 2);
+	}
+	return numerator / pow(numberOfPixels, 2);
+}
+
+double HistogramProcesser::calculateInformationSourceEntropy()
+{
+	int numberOfPixels = width * height;
+	double numerator = 0;
+	for (int i = 0; i < 256; i++)
+	{
+		if (histogramHeight[i] > 0)
+		{
+			numerator += histogramHeight[i] * log2(histogramHeight[i] / numberOfPixels);
+		}
+	}
+	return numerator / numberOfPixels;
+}
+

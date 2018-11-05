@@ -65,10 +65,10 @@ void HistogramProcesser::processImage()
 			cout << "Flattening coefficient is: " << calculateFlatteningCoefficient() << endl;
 			break;
 		case cvarcoii:
-			cout << "Function under developement" << endl;
+			cout << "Variation coefficient I is: " << calculateVariationCoefficientII() << endl;
 			break;
 		case centropy:
-			cout << "Function under developement" << endl;
+			cout << "Information source entropy is: " << calculateInformationSourceEntropy() << endl;
 			break;
 		case sedgesharp:
 			cout << "Function under developement" << endl;
