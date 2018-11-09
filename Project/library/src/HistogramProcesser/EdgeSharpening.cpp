@@ -23,9 +23,6 @@ void HistogramProcesser::edgeSharpening(int variant)
 	unsigned short int index;
 	int value;
 
-	std::vector<int> kernel = kernels[variant];
-	
-	
 	for (x = 0; x < width; x++)
 	{
 		window.x0 = x - 1;
@@ -61,7 +58,7 @@ void HistogramProcesser::edgeSharpening(int variant)
 				{
 					for (i = window.x0; i <= window.x1; i++)
 					{
-						value += image(i, j, channel) * kernel[index];
+						value += image(i, j, channel) * kernels[variant][index];
 						index++;
 					}
 				}
@@ -95,7 +92,6 @@ void HistogramProcesser::optimizedSharpen()
 	unsigned short int index;
 	int value;
 
-	int kernel[] = { 1,-2,1, -2,5,-2, 1,-2,1 };
 
 
 	for (x = 0; x < width; x++)
@@ -133,7 +129,7 @@ void HistogramProcesser::optimizedSharpen()
 				{
 					for (i = window.x0; i <= window.x1; i++)
 					{
-						value += image(i, j, channel) * kernel[index];
+						value += image(i, j, channel) * kernels[2][index];
 						index++;
 					}
 				}
