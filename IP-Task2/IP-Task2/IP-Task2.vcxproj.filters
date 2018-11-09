@@ -60,6 +60,9 @@
     <ClCompile Include="ImageCharacteristicsCalculator.cpp">
       <Filter>Pliki źródłowe\HistogramProcesser</Filter>
     </ClCompile>
+    <ClCompile Include="EdgeSharpening.cpp">
+      <Filter>Pliki źródłowe\HistogramProcesser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArgumentsHandler.h">

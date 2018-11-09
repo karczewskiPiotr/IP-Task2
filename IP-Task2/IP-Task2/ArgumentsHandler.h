@@ -20,8 +20,8 @@ private:
 		"--histogram", "--hpower", "--cmean", "--cvariance", "--cstdev", "--cvarcoi", "--casyco", "--cflatco", "--cvarcoii", "--centropy", "--sedgesharp", "--orosenfeld"
 	};
 
-	std::string optionsRequiringValues[8]{
-		"--brightness", "--contrast", "--shrink", "--enlarge", "--min", "--max", "--median", "--histogram"
+	std::string optionsRequiringValues[9]{
+		"--brightness", "--contrast", "--shrink", "--enlarge", "--min", "--max", "--median", "--histogram", "--sedgesharp"
 	};
 
 	bool optionIsValid(std::string option) const;
