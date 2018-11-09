@@ -16,7 +16,7 @@ ArgumentsHandler::~ArgumentsHandler()
 
 int ArgumentsHandler::convertToInt(std::string option) const
 {
-	for (int i = 0; i < 26; i++)
+	for (int i = 0; i < 29; i++)
 	{
 		if (options[i] == option) return i + 1;
 	}
@@ -37,6 +37,7 @@ bool ArgumentsHandler::valueIsValid(string value) const
 {
 	int dot_counter = 0;
 	if (option == "--histogram" && stoi(value) > 2) return false;
+	if (option == "--sedgesharp" && stoi(value) > 3) return false;
 	for (string::iterator iterator = value.begin(); iterator != value.end(); ++iterator)
 	{
 		if (*iterator < 48 || *iterator > 57)
@@ -192,7 +193,6 @@ void ArgumentsHandler::validateArguments()
 		imageName = argv[1];
 		option = argv[2];
 		value = argv[3];
-
 		try
 		{
 
@@ -243,7 +243,6 @@ ArgumentsHandler::Processers ArgumentsHandler::get_currentProcesser() const
 	int currentOption = convertToInt(option);
 	if (currentOption < 17) return Processers::ImageProcesser;
 	if (currentOption < 29) return Processers::HistogramProcesser;
-	//TODO: return invalid processer and check against it in main
 }
 
 ArgumentsHandler::Arguments ArgumentsHandler::get_arguments() const

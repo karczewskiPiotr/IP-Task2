@@ -13,6 +13,7 @@ set(SOURCE_FILES
 	src/HistogramProcesser/HistogramProcesser.cpp
 	src/HistogramProcesser/HistogramCreator.cpp
 	src/HistogramProcesser/ImageCharacteristicsCalculator.cpp
+	src/HistogramProcesser/EdgeSharpening.cpp
     src/ImageProcesser/ImageProcesser.cpp
     src/ImageProcesser/BasicImageTransformations.cpp
     src/ImageProcesser/HelperMethods.cpp

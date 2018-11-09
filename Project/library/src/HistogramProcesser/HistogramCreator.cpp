@@ -4,6 +4,7 @@ using namespace std;
 
 void HistogramProcesser::getImageHistogram(int channel)
 {
+	if (channel == 3) return;
 	for (unsigned int x = 0; x < width; x++)
 	{
 		for (unsigned int y = 0; y < height; y++)
