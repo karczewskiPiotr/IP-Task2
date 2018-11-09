@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="ArgumentsHandler.cpp" />
     <ClCompile Include="BasicImageTransformations.cpp" />
+    <ClCompile Include="EdgeSharpening.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="HelperMethods.cpp" />
     <ClCompile Include="HistogramCreator.cpp" />

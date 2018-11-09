@@ -71,7 +71,8 @@ void HistogramProcesser::processImage()
 			cout << "Information source entropy is: " << calculateInformationSourceEntropy() << endl;
 			break;
 		case sedgesharp:
-			cout << "Function under developement" << endl;
+			if ((int)value == 3) optimizedSharpen();
+			else edgeSharpening((int)value);
 			break;
 		case orosenfeld:
 			cout << "Function under developement" << endl;
