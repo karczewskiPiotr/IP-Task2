@@ -26,6 +26,7 @@ private:
 	double calculateInformationSourceEntropy();
 	void edgeSharpening(int variant);
 	void optimizedSharpen();
+	void edgeDetection(int P);
 public:
 	HistogramProcesser();
 	HistogramProcesser(std::string imageName, int option, double value);

@@ -20,12 +20,13 @@ private:
 		"--histogram", "--hpower", "--cmean", "--cvariance", "--cstdev", "--cvarcoi", "--casyco", "--cflatco", "--cvarcoii", "--centropy", "--sedgesharp", "--orosenfeld"
 	};
 
-	std::string optionsRequiringValues[9]{
-		"--brightness", "--contrast", "--shrink", "--enlarge", "--min", "--max", "--median", "--histogram", "--sedgesharp"
+	std::string optionsRequiringValues[10]{
+		"--brightness", "--contrast", "--shrink", "--enlarge", "--min", "--max", "--median", "--histogram", "--sedgesharp", "--orosenfeld"
 	};
 
 	bool optionIsValid(std::string option) const;
 	bool optionRequiresValue(std::string option) const;
+	bool isPowerOfTwo(int x) const;
 	bool valueIsValid(std::string value) const;
 	bool isNameOfFile(std::string name) const;
 

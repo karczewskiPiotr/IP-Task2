@@ -36,7 +36,7 @@ void HistogramProcesser::processImage()
 	height = image.height();
 	width = image.width();
 
-	getImageHistogram((int)value);
+	if (value < 3) getImageHistogram((int)value);
 
 	switch (option)
 	{
@@ -75,7 +75,7 @@ void HistogramProcesser::processImage()
 			else edgeSharpening((int)value);
 			break;
 		case orosenfeld:
-			cout << "Function under developement" << endl;
+			edgeDetection((int)value);
 			break;
 		default:
 			break;

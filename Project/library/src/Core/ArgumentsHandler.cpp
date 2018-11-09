@@ -33,11 +33,24 @@ bool ArgumentsHandler::optionRequiresValue(string option) const
 	return find(begin(optionsRequiringValues), end(optionsRequiringValues), option) != end(optionsRequiringValues);
 }
 
+bool ArgumentsHandler::isPowerOfTwo(int x) const
+{
+	//true till x is not equal to 1
+	while (x != 1)
+	{
+		//checks whether a number is divisible by 2
+		if (x % 2 != 0) return false;
+		x /= 2;
+	}
+	return true;
+}
+
 bool ArgumentsHandler::valueIsValid(string value) const
 {
 	int dot_counter = 0;
 	if (option == "--histogram" && stoi(value) > 2) return false;
 	if (option == "--sedgesharp" && stoi(value) > 3) return false;
+	if (option == "--orosenfeld" && (stoi(value) <= 0 || !isPowerOfTwo(stoi(value)))) return false;
 	for (string::iterator iterator = value.begin(); iterator != value.end(); ++iterator)
 	{
 		if (*iterator < 48 || *iterator > 57)
