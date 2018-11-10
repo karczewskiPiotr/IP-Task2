@@ -1,5 +1,6 @@
 #include "HistogramProcesser.h"
 #include <iostream>
+#include <chrono>
 
 using namespace std;
 
@@ -37,6 +38,8 @@ void HistogramProcesser::processImage()
 	width = image.width();
 
 	if (value < 3) getImageHistogram((int)value);
+
+	chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
 
 	switch (option)
 	{
@@ -80,4 +83,8 @@ void HistogramProcesser::processImage()
 		default:
 			break;
 	}
+
+	chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::microseconds>(t2 - t1).count() / (double)1000000;
+	cout << "Algorithm duration: " << duration << " seconds";
 }

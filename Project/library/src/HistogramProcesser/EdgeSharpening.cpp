@@ -67,7 +67,6 @@ void HistogramProcesser::edgeSharpening(int variant)
 		}
 	}
 	image = imageCopy;
-	image.display("Sharpenning preview", false);
 	image.save("sharpened.bmp");
 }
 
@@ -129,8 +128,23 @@ void HistogramProcesser::optimizedSharpen()
 				{
 					for (i = window.x0; i <= window.x1; i++)
 					{
-						value += image(i, j, channel) * kernels[2][index];
-						index++;
+						if (kernels[0][index] == 0)
+						{
+							index++;
+							continue;
+						}
+						else if (index == 4)
+						{
+							value += image(i, j, channel) * 5;
+							index++;
+							continue;
+						}
+						else
+						{
+							value += image(i, j, channel) * -1;
+							index++;
+						}
+						
 					}
 				}
 				imageCopy(x, y, channel) = truncate(value);
@@ -138,6 +152,5 @@ void HistogramProcesser::optimizedSharpen()
 		}
 	}
 	image = imageCopy;
-	image.display("Sharpenning preview", false);
 	image.save("sharpened.bmp");
 }

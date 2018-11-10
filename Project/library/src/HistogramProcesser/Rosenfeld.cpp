@@ -33,6 +33,5 @@ void HistogramProcesser::edgeDetection(int P)
 		}
 	}
 	image = imageCopy;
-	image.display("Edge detection preview", false);
 	image.save("edges.bmp");
 }

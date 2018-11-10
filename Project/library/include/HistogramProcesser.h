@@ -1,6 +1,5 @@
 #pragma once
 #include "Processer.h"
-#include <vector>
 
 class HistogramProcesser : public Processer
 {

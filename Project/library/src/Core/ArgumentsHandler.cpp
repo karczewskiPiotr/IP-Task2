@@ -35,10 +35,8 @@ bool ArgumentsHandler::optionRequiresValue(string option) const
 
 bool ArgumentsHandler::isPowerOfTwo(int x) const
 {
-	//true till x is not equal to 1
 	while (x != 1)
 	{
-		//checks whether a number is divisible by 2
 		if (x % 2 != 0) return false;
 		x /= 2;
 	}
