@@ -18,7 +18,7 @@ int ArgumentsHandler::convertToInt(std::string option) const
 {
 	for (int i = 0; i < 29; i++)
 	{
-		if (options[i] == option) return i + 1;
+		if (options[i] == option) return i;
 	}
 	return 0;
 }

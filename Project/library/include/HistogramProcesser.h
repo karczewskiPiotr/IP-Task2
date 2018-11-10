@@ -6,7 +6,7 @@ class HistogramProcesser : public Processer
 private:
 	enum Options
 	{
-		histogram = 18, hpower, cmean, cvariance, cstdev, cvarcoi, casyco, cflatco, cvarcoii, centropy, sedgesharp, orosenfeld
+		histogram = 17, hpower, cmean, cvariance, cstdev, cvarcoi, casyco, cflatco, cvarcoii, centropy, sedgesharp, orosenfeld
 	};
 
 	int histogramHeight[256] = {};

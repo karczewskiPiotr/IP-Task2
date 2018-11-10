@@ -8,7 +8,7 @@ class ImageProcesser : public Processer
 private:
 	enum options
 	{
-		brightness = 2, contrast, negative, hflip, vflip, dflip, shrink, enlarge, min, max, median, mse, pmse, snr, psnr, md
+		brightness = 1, contrast, negative, hflip, vflip, dflip, shrink, enlarge, min, max, median, mse, pmse, snr, psnr, md
 	};
 
 	std::string noisyImageName;
