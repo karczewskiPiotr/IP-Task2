@@ -23,9 +23,6 @@ void HistogramProcesser::edgeSharpening(int variant)
 	unsigned short int index;
 	int value;
 
-	std::vector<int> kernel = kernels[variant];
-	
-	
 	for (x = 0; x < width; x++)
 	{
 		window.x0 = x - 1;
@@ -61,7 +58,7 @@ void HistogramProcesser::edgeSharpening(int variant)
 				{
 					for (i = window.x0; i <= window.x1; i++)
 					{
-						value += image(i, j, channel) * kernel[index];
+						value += image(i, j, channel) * kernels[variant][index];
 						index++;
 					}
 				}
@@ -70,7 +67,6 @@ void HistogramProcesser::edgeSharpening(int variant)
 		}
 	}
 	image = imageCopy;
-	image.display("Sharpenning preview", false);
 	image.save("sharpened.bmp");
 }
 
@@ -95,7 +91,6 @@ void HistogramProcesser::optimizedSharpen()
 	unsigned short int index;
 	int value;
 
-	int kernel[] = { 1,-2,1, -2,5,-2, 1,-2,1 };
 
 
 	for (x = 0; x < width; x++)
@@ -133,8 +128,23 @@ void HistogramProcesser::optimizedSharpen()
 				{
 					for (i = window.x0; i <= window.x1; i++)
 					{
-						value += image(i, j, channel) * kernel[index];
-						index++;
+						if (kernels[0][index] == 0)
+						{
+							index++;
+							continue;
+						}
+						else if (index == 4)
+						{
+							value += image(i, j, channel) * 5;
+							index++;
+							continue;
+						}
+						else
+						{
+							value += image(i, j, channel) * -1;
+							index++;
+						}
+						
 					}
 				}
 				imageCopy(x, y, channel) = truncate(value);
@@ -142,6 +152,5 @@ void HistogramProcesser::optimizedSharpen()
 		}
 	}
 	image = imageCopy;
-	image.display("Sharpenning preview", false);
 	image.save("sharpened.bmp");
 }
