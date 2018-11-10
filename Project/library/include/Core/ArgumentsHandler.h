@@ -9,6 +9,7 @@ private:
 
 	std::string option;
 	std::string value;
+	std::string secondValue;
 	std::string imageName;
 	std::string noisyImageName;
 	std::string denoisedImageName;
@@ -20,8 +21,8 @@ private:
 		"--histogram", "--hpower", "--cmean", "--cvariance", "--cstdev", "--cvarcoi", "--casyco", "--cflatco", "--cvarcoii", "--centropy", "--sedgesharp", "--orosenfeld"
 	};
 
-	std::string optionsRequiringValues[10]{
-		"--brightness", "--contrast", "--shrink", "--enlarge", "--min", "--max", "--median", "--histogram", "--sedgesharp", "--orosenfeld"
+	std::string optionsRequiringValues[11]{
+		"--brightness", "--contrast", "--shrink", "--enlarge", "--min", "--max", "--median", "--histogram", "--hpower", "--sedgesharp", "--orosenfeld"
 	};
 
 	bool optionIsValid(std::string option) const;
@@ -29,6 +30,7 @@ private:
 	bool isPowerOfTwo(int x) const;
 	bool valueIsValid(std::string value) const;
 	bool isNameOfFile(std::string name) const;
+	bool isWithinPixelRange(int value) const;
 
 public:
 	ArgumentsHandler(int argc, char* argv[]);
@@ -36,7 +38,8 @@ public:
 
 	enum Processers
 	{
-		ImageProcesser = 0,
+		None = 0,
+		ImageProcesser,
 		HistogramProcesser
 	};
 
@@ -47,6 +50,7 @@ public:
 		std::string denoisedImageName;
 		int option;
 		double value;
+		int secondValue;
 		Processers processer;
 	};
 

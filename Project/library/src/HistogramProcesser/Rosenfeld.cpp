@@ -1,4 +1,3 @@
-#pragma once
 #include "HistogramProcesser.h"
 #include <iostream>
 
@@ -33,5 +32,4 @@ void HistogramProcesser::edgeDetection(int P)
 		}
 	}
 	image = imageCopy;
-	image.save("edges.bmp");
 }

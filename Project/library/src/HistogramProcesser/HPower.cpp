@@ -1,7 +1,9 @@
 #include "HistogramProcesser.h"
-
+#include <iostream>
+using namespace std;
 void HistogramProcesser::performHPower(int minBrightness, int maxBrightness)
 {
+
 	int numberOfPixels = width * height;
 	unsigned short int channels = image.spectrum();
 	double base = 0;
@@ -10,7 +12,7 @@ void HistogramProcesser::performHPower(int minBrightness, int maxBrightness)
 	{
 		for (unsigned int y = 0; y < height; y++)
 		{
-			for (int channel = 0; channel < channels; channel++)
+			for (unsigned short int channel = 0; channel < channels; channel++)
 			{
 				double sum = 0;
 				for (unsigned char i = 0; i < image(x, y, channel); i++)
@@ -18,7 +20,7 @@ void HistogramProcesser::performHPower(int minBrightness, int maxBrightness)
 					sum += histogramHeight[i];
 				}
 				base = pow(minBrightness, exponent) + (pow(maxBrightness, exponent) - pow(minBrightness, exponent))*sum / numberOfPixels;
-				image(x, y, channel) = truncate((int)pow(base, 3));
+				image(x, y, channel) = truncate(pow(base, 3));
 			}
 		}
 	}
