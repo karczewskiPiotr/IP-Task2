@@ -15,6 +15,7 @@ set(SOURCE_FILES
 	src/HistogramProcesser/ImageCharacteristicsCalculator.cpp
 	src/HistogramProcesser/EdgeSharpening.cpp
 	src/HistogramProcesser/Rosenfeld.cpp
+	src/HistogramProcesser/HPower.cpp
     src/ImageProcesser/ImageProcesser.cpp
     src/ImageProcesser/BasicImageTransformations.cpp
     src/ImageProcesser/HelperMethods.cpp

@@ -15,6 +15,7 @@ private:
 
 	void getImageHistogram(int channel);
 	void createHistogram(int channel);
+	void performHPower(int minBrightness, int maxBrightness);
 	double calculateMean();
 	double calculateVariance();
 	double calculateStandardDeviation();

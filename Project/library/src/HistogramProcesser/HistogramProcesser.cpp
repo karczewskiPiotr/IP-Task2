@@ -37,7 +37,7 @@ void HistogramProcesser::processImage()
 	height = image.height();
 	width = image.width();
 
-	if (value < 3) getImageHistogram((int)value);
+	if (option < 27) getImageHistogram((int)value);
 
 	chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
 
@@ -47,7 +47,7 @@ void HistogramProcesser::processImage()
 			createHistogram((int)value);
 			break;
 		case hpower:
-			cout << "Function under developement" << endl;
+			performHPower(0, 255);
 			break;
 		case cmean:
 			cout << "Mean is: " << calculateMean() << endl;
@@ -87,4 +87,7 @@ void HistogramProcesser::processImage()
 	chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(t2 - t1).count() / (double)1000000;
 	cout << "Algorithm duration: " << duration << " seconds";
+
+	image.save("processedImage.bmp");
+	image.display("Processed image", false);
 }
