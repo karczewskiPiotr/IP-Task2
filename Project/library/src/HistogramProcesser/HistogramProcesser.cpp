@@ -8,8 +8,8 @@ HistogramProcesser::HistogramProcesser()
 {
 }
 
-HistogramProcesser::HistogramProcesser(std::string imageName, int option, double value)
-	:Processer(imageName, option, value)
+HistogramProcesser::HistogramProcesser(std::string imageName, int option, double value, int secondValue)
+	:Processer(imageName, option, value), secondValue(secondValue)
 {
 }
 
@@ -37,7 +37,11 @@ void HistogramProcesser::processImage()
 	height = image.height();
 	width = image.width();
 
-	if (value < 3) getImageHistogram((int)value);
+	if (option < sedgesharp)
+	{
+		int channel = option == hpower ? 0 : value;
+		getImageHistogram(channel);
+	}
 
 	chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
 
@@ -47,7 +51,7 @@ void HistogramProcesser::processImage()
 			createHistogram((int)value);
 			break;
 		case hpower:
-			cout << "Function under developement" << endl;
+			performHPower(value, secondValue);
 			break;
 		case cmean:
 			cout << "Mean is: " << calculateMean() << endl;
@@ -87,4 +91,7 @@ void HistogramProcesser::processImage()
 	chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(t2 - t1).count() / (double)1000000;
 	cout << "Algorithm duration: " << duration << " seconds";
+
+	image.save("processedImage.bmp");
+	image.display("Processed image", false);
 }

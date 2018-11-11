@@ -16,7 +16,6 @@ int main(int argc, char* argv[])
 	ArgumentsHandler::Arguments arguments = ArgumentsHandler.get_arguments();
 	switch (arguments.processer)
 	{
-
 		case ArgumentsHandler::Processers::ImageProcesser:
 		{
 			ImageProcesser ImageProcesser(arguments.imageName, arguments.option, arguments.value, arguments.noisyImageName, arguments.denoisedImageName);
@@ -26,10 +25,12 @@ int main(int argc, char* argv[])
 
 		case ArgumentsHandler::Processers::HistogramProcesser:
 		{
-			HistogramProcesser HistogramProcesser(arguments.imageName, arguments.option, arguments.value);
+			HistogramProcesser HistogramProcesser(arguments.imageName, arguments.option, arguments.value, arguments.secondValue);
 			HistogramProcesser.processImage();
 			break;
 		}
+		default:
+			return 0;
 	}
 
 	return 0;

@@ -13,7 +13,7 @@ protected:
 	unsigned short int height;
 	unsigned short int width;
 
-	int truncate(int value);
+	int truncate(double value);
 	
 public:
 	Processer();

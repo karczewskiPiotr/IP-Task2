@@ -1,7 +1,5 @@
 #include "HistogramProcesser.h"
 
-using namespace std;
-
 void HistogramProcesser::getImageHistogram(int channel)
 {
 	for (unsigned int x = 0; x < width; x++)
@@ -15,7 +13,7 @@ void HistogramProcesser::getImageHistogram(int channel)
 
 void HistogramProcesser::createHistogram(int channel)
 {
-	int histogramMaxHeight = *max_element(histogramHeight, histogramHeight + 256);
+	int histogramMaxHeight = *std::max_element(histogramHeight, histogramHeight + 256);
 	cimg_library::CImg<unsigned char>* img = new cimg_library::CImg<unsigned char>(256, histogramMaxHeight, 1, 3, 0);
 	histogramImage = *img;
 	delete img;
