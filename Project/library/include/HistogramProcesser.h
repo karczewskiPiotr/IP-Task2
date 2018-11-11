@@ -11,21 +11,21 @@ private:
 
 	int secondValue;
 
-	int histogramHeight[256] = {};
+	int histogramHeight[3][256] = {};
 	cimg_library::CImg<unsigned char> histogramImage;
 	int kernels[3][9] = { { 0,-1,0, -1,5,-1, 0,-1,0 },  { -1,-1,-1, -1,9,-1, -1,-1,-1 },  { 1,-2,1, -2,5,-2, 1,-2,1 } };
 
-	void getImageHistogram(int channel);
+	void getImageHistograms();
 	void createHistogram(int channel);
 	void performHPower(int minBrightness, int maxBrightness);
-	double calculateMean();
-	double calculateVariance();
-	double calculateStandardDeviation();
-	double calculateVariationCoefficientI();
-	double calculateAssymetryCoefficient();
-	double calculateFlatteningCoefficient();
-	double calculateVariationCoefficientII();
-	double calculateInformationSourceEntropy();
+	double calculateMean(int channel);
+	double calculateVariance(int channel);
+	double calculateStandardDeviation(int channel);
+	double calculateVariationCoefficientI(int channel);
+	double calculateAssymetryCoefficient(int channel);
+	double calculateFlatteningCoefficient(int channel);
+	double calculateVariationCoefficientII(int channel);
+	double calculateInformationSourceEntropy(int channel);
 	void edgeSharpening(int variant);
 	void optimizedSharpen();
 	void edgeDetection(int P);

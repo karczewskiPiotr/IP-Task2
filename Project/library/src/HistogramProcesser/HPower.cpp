@@ -17,7 +17,7 @@ void HistogramProcesser::performHPower(int minBrightness, int maxBrightness)
 				double sum = 0;
 				for (unsigned char i = 0; i < image(x, y, channel); i++)
 				{
-					sum += histogramHeight[i];
+					sum += histogramHeight[channel][i];
 				}
 				base = pow(minBrightness, exponent) + (pow(maxBrightness, exponent) - pow(minBrightness, exponent))*sum / numberOfPixels;
 				image(x, y, channel) = truncate(pow(base, 3));

@@ -21,11 +21,16 @@ private:
 		"--histogram", "--hpower", "--cmean", "--cvariance", "--cstdev", "--cvarcoi", "--casyco", "--cflatco", "--cvarcoii", "--centropy", "--sedgesharp", "--orosenfeld"
 	};
 
-	std::string optionsRequiringValues[11]{
-		"--brightness", "--contrast", "--shrink", "--enlarge", "--min", "--max", "--median", "--histogram", "--hpower", "--sedgesharp", "--orosenfeld"
+	std::string optionsRequiringValues[19]{
+		"--brightness", "--contrast", "--shrink", "--enlarge", "--min", "--max", "--median", "--histogram", "--cmean", "--cvariance", "--cstdev", "--cvarcoi", "--casyco", "--cflatco", "--cvarcoii", "--centropy", "--hpower", "--sedgesharp", "--orosenfeld"
+	};
+
+	std::string optionsRequiringChannel[9]{
+		"--histogram", "--cmean", "--cvariance", "--cstdev", "--cvarcoi", "--casyco", "--cflatco", "--cvarcoii", "--centropy"
 	};
 
 	bool optionIsValid(std::string option) const;
+	bool optionRequiresChannel(std::string option) const;
 	bool optionRequiresValue(std::string option) const;
 	bool isPowerOfTwo(int x) const;
 	bool valueIsValid(std::string value) const;

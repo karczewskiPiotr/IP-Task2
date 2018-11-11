@@ -33,6 +33,11 @@ bool ArgumentsHandler::optionRequiresValue(string option) const
 	return find(begin(optionsRequiringValues), end(optionsRequiringValues), option) != end(optionsRequiringValues);
 }
 
+bool ArgumentsHandler::optionRequiresChannel(string option) const
+{
+	return find(begin(optionsRequiringChannel), end(optionsRequiringChannel), option) != end(optionsRequiringChannel);
+}
+
 bool ArgumentsHandler::isPowerOfTwo(int x) const
 {
 	while (x != 1)
@@ -70,8 +75,8 @@ bool ArgumentsHandler::valueIsValid(string value) const
 		if (dot_counter > 1) return false;
 	}
 
-	if (option == "--histogram" && stoi(value) > 2) return false;
-	if (option == "--hpower" && ((stoi(value) > stoi(secondValue))) || !isWithinPixelRange(stoi(value)) || !isWithinPixelRange(stoi(secondValue))) return false;
+	if (optionRequiresChannel(option) && stoi(value) > 2) return false;
+	if (option == "--hpower" && !isWithinPixelRange(stoi(value))) return false;
 	if (option == "--sedgesharp" && stoi(value) > 3) return false;
 	if (option == "--orosenfeld" && (stoi(value) <= 0 || !isPowerOfTwo(stoi(value)))) return false;
 
@@ -96,6 +101,7 @@ void ArgumentsHandler::helpMessage() const
 
 Available commands:
 
+TASK 1:
 	Elementary operations:
 	--brightness
 		Image brightness modification
@@ -169,7 +175,36 @@ Available commands:
 	--psnr
 		Peak signal to noise ratio
 	--md
-		Maximum difference)";
+		Maximum difference
+TASK 2:
+	
+	--histogram channel
+		Generates and displays a histogram for the given image at a given channel.
+	--hpower minBrightness maxBrightness
+		Power 2/3 final probability density function
+		Used to extend the dynamic range of an image (may generate artifacts for color images).
+		Both values must be within 0 - 255 range.
+
+	Image characteristics based on the histogram for a given channel:
+	--cmean channel
+		Calculates the mean value of pixel intensity.
+	--cvariance channel
+		Calculates the variance.
+	--cstdev channel
+		Calculates the standard deviation based on the variance.
+	--cvarcoi channel
+		Calculates the variation coefficient I.
+	--casyco
+		Calculates the asymmetry coefficient based on the mean.
+	--cflatco
+		Calculates the flattening coefficient based on the mean.
+	--cvarcoii
+		Calculates the variation coefficient II.
+	--centropy
+		Calculates the information source entropy.
+
+	
+)";
 }
 
 void ArgumentsHandler::validateArguments()
@@ -214,12 +249,13 @@ void ArgumentsHandler::validateArguments()
 			imageName = argv[1];
 			option = argv[2];
 			value = argv[3];
+
 			try
 			{
 
 				if (optionIsValid(option) && option != "--help")
 				{
-					if (!optionRequiresValue(option)) { throw error.invalidNumberOfArguments; }
+					if (!optionRequiresValue(option) || option == "--hpower") { throw error.invalidNumberOfArguments; }
 					else if (!valueIsValid(value)) { throw error.invalidValue; }
 					else { argumentsAreValid = true; break; }
 				}
@@ -247,7 +283,10 @@ void ArgumentsHandler::validateArguments()
 						secondValue = argv[4];
 						if (valueIsValid(value) && valueIsValid(secondValue))
 						{
-							argumentsAreValid = true; break;
+							if (stoi(value) <= stoi(secondValue))
+							{
+								argumentsAreValid = true; break;
+							}
 						}
 						throw error.invalidValue;
 					}
@@ -273,6 +312,7 @@ void ArgumentsHandler::validateArguments()
 			error.InvalidNumberOfArguments();
 			break;
 	}
+
 }
 
 ArgumentsHandler::Processers ArgumentsHandler::get_currentProcesser() const
