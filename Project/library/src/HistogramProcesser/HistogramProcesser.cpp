@@ -37,48 +37,44 @@ void HistogramProcesser::processImage()
 	height = image.height();
 	width = image.width();
 
-	if (option < sedgesharp)
-	{
-		int channel = option == hpower ? 0 : value;
-		getImageHistogram(channel);
-	}
+	if (option < sedgesharp) getImageHistograms();
 
 	chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
-
+	int channel = (int)value;
 	switch (option)
 	{
 		case histogram:
-			createHistogram((int)value);
+			createHistogram(channel);
 			break;
 		case hpower:
-			performHPower(value, secondValue);
+			performHPower((int)value, secondValue);
 			break;
 		case cmean:
-			cout << "Mean is: " << calculateMean() << endl;
+			cout << "Mean is: " << calculateMean(channel) << endl;
 			break;
 		case cvariance:
-			cout << "Variance is: " << calculateVariance() << endl;
+			cout << "Variance is: " << calculateVariance(channel) << endl;
 			break;
 		case cstdev:
-			cout << "Standard deviation is: " << calculateStandardDeviation() << endl;
+			cout << "Standard deviation is: " << calculateStandardDeviation(channel) << endl;
 			break;
 		case cvarcoi:
-			cout << "Variation coefficient I is: " << calculateVariationCoefficientI() << endl;
+			cout << "Variation coefficient I is: " << calculateVariationCoefficientI(channel) << endl;
 			break;
 		case casyco:
-			cout << "Assymetry coefficient is: " << calculateAssymetryCoefficient() << endl;
+			cout << "Assymetry coefficient is: " << calculateAssymetryCoefficient(channel) << endl;
 			break;
 		case cflatco:
-			cout << "Flattening coefficient is: " << calculateFlatteningCoefficient() << endl;
+			cout << "Flattening coefficient is: " << calculateFlatteningCoefficient(channel) << endl;
 			break;
 		case cvarcoii:
-			cout << "Variation coefficient I is: " << calculateVariationCoefficientII() << endl;
+			cout << "Variation coefficient I is: " << calculateVariationCoefficientII(channel) << endl;
 			break;
 		case centropy:
-			cout << "Information source entropy is: " << calculateInformationSourceEntropy() << endl;
+			cout << "Information source entropy is: " << calculateInformationSourceEntropy(channel) << endl;
 			break;
 		case sedgesharp:
-			if ((int)value == 3) optimizedSharpen();
+			if (channel == 3) optimizedSharpen();
 			else edgeSharpening((int)value);
 			break;
 		case orosenfeld:
@@ -88,10 +84,12 @@ void HistogramProcesser::processImage()
 			break;
 	}
 
-	chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
-	auto duration = chrono::duration_cast<chrono::microseconds>(t2 - t1).count() / (double)1000000;
-	cout << "Algorithm duration: " << duration << " seconds";
-
-	image.save("processedImage.bmp");
-	image.display("Processed image", false);
+	if (option > centropy || option == hpower)
+	{
+		chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
+		auto duration = chrono::duration_cast<chrono::microseconds>(t2 - t1).count() / (double)1000000;
+		cout << "Algorithm duration: " << duration << " seconds";
+		image.save("processedImage.bmp");
+		image.display("Processed image", false);
+	}
 }
