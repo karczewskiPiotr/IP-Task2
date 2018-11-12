@@ -181,11 +181,12 @@ TASK 2:
 	--histogram channel
 		Generates and displays a histogram for the given image at a given channel.
 	--hpower minBrightness maxBrightness
-		Power 2/3 final probability density function
+		Power 2/3 final probability density function (image quality enhancement).
 		Used to extend the dynamic range of an image (may generate artifacts for color images).
-		Both values must be within 0 - 255 range.
+		Both values must be within <0, 255> range.
 
 	Image characteristics based on the histogram for a given channel:
+
 	--cmean channel
 		Calculates the mean value of pixel intensity.
 	--cvariance channel
@@ -203,7 +204,38 @@ TASK 2:
 	--centropy
 		Calculates the information source entropy.
 
-	
+
+	--sedgesharp <0, 2>
+		Edge sharpening algorithm. Available variants:
+		Mask 0:
+
+		 0  -1   0
+		-1   5  -1
+		 0  -1   0
+
+		Mask 1:
+
+		-1  -1  -1
+		-1   9  -1
+		-1  -1  -1
+
+		Mask 2:
+
+		 1  -2   1
+		-2   5  -2
+		 1  -2   1
+
+	--sedgesharp 3
+
+		Optimized edge sharpening algorithm working with the mask:
+
+		 0  -1   0
+		-1   5  -1
+		 0  -1   0
+
+	--orosenfeld P
+		Edge detection algorithm. P must be a power of 2.
+
 )";
 }
 
