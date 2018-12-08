@@ -78,19 +78,47 @@ void HistogramProcesser::optimizedSharpen()
 	unsigned short int y;
 	unsigned short int channel;
 
-	int value;
+	// Create three rows which have the values of images at corresponding positions
+	// Upon every y iteration, every row copies the values from the row underneath
+	unsigned char(*topRow)[3] = new unsigned char[width][3];
+	unsigned char(*middleRow)[3] = new unsigned char[width][3];
+	unsigned char(*bottomRow)[3] = new unsigned char[width][3];
 
+	int value;
 	for (x = 1; x < width - 1; x++)
 	{
-		for (y = 1; y < height - 1; y++)
+		for (channel = 0; channel < channels; channel++)
+		{
+			topRow[x][channel] = image(x, 0, channel);
+			middleRow[x][channel] = image(x, 1, channel);
+			bottomRow[x][channel] = image(x, 2, channel);
+		}
+	}
+
+	for (y = 1; y < height - 1; y++)
+	{
+		for (x = 1; x < width - 1; x++)
 		{
 			for (channel = 0; channel < channels; channel++)
 			{
-				value = 0 - image(x, y - 1, channel) - image(x - 1, y, channel) + 5 * image(x, y, channel) - image(x, y + 1, channel) - image(x, y - 1, channel);
+				value = 0 - topRow[x][channel] - middleRow[x - 1][channel] + 5 * middleRow[x][channel] - middleRow[x + 1][channel] - bottomRow[x][channel];
 				imageCopy(x, y, channel) = truncate(value);
 			}
 		}
+		topRow = middleRow;
+		middleRow = bottomRow;
+		for (x = 1; x < width - 1; x++)
+		{
+			for (channel = 0; channel < channels; channel++)
+			{
+				bottomRow[x][channel] = image(x, y + 2, channel);
+			}
+		}
 	}
+
+	delete[] topRow;
+	delete[] middleRow;
+	delete[] bottomRow;
 
 	image = imageCopy;
 }
